@@ -1,5 +1,4 @@
 def getOrderedLogs(logfile)
-
     logsArray = File.readlines(File.expand_path(logfile, File.dirname(__FILE__)))
 
     arrayOfLogsAsHashes = logsArray.map { |log|
