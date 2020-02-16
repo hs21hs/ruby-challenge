@@ -28,56 +28,122 @@ RSpec.describe 'getOrderedLogs' do
         expect(lengthOfIndex1List).to eq(4)
     end
 
-    it 'has a hash in index 0 which contains a list that is ordered by number of visits' do
+
+
+    it 'has a hash in index 0 which contains a list that has the correct most viewed page' do
         index0Hash = getOrderedLogs('test.log')[0]
         mostViewedPage = index0Hash[:list][0]
-        secondMostViewedPage = index0Hash[:list][1]
-        thirdMostViewedPage = index0Hash[:list][2] 
-        fourthMostViewedPage = index0Hash[:list][3]
 
         expect(mostViewedPage[:name]).to eq('home')
-        expect(secondMostViewedPage[:name]).to eq('profile')
-        expect(thirdMostViewedPage[:name]).to eq('search')
-        expect(fourthMostViewedPage[:name]).to eq('about')
     end
 
-    it 'has a hash in index 1 which contains a list that is ordered by number of unique visits' do
+    it 'has a hash in index 0 which contains a list that has the correct second most viewed page' do
+        index0Hash = getOrderedLogs('test.log')[0]
+        secondMostViewedPage = index0Hash[:list][1]
+
+        expect(secondMostViewedPage[:name]).to eq('profile')
+    end
+
+    it 'has a hash in index 0 which contains a list that has the correct third most viewed page' do
+        index0Hash = getOrderedLogs('test.log')[0]
+        thirdMostViewedPage = index0Hash[:list][2] 
+       
+        expect(thirdMostViewedPage[:name]).to eq('search')
+    end
+
+    it 'has a hash in index 0 which contains a list that has the correct least viewed page' do
+        index0Hash = getOrderedLogs('test.log')[0]
+        leastViewedPage = index0Hash[:list][3]
+
+        expect(leastViewedPage[:name]).to eq('about')
+    end
+
+
+    it 'has a hash in index 1 which contains a list that has the correct most viewed page, ordered by unique views' do
         index1Hash = getOrderedLogs('test.log')[1]
         mostViewedPage = index1Hash[:list][0]
-        secondMostViewedPage = index1Hash[:list][1]
-        thirdMostViewedPage = index1Hash[:list][2] 
-        fourthMostViewedPage = index1Hash[:list][3]
 
         expect(mostViewedPage[:name]).to eq('home')
-        expect(secondMostViewedPage[:name]).to eq('search')
-        expect(thirdMostViewedPage[:name]).to eq('profile')
-        expect(fourthMostViewedPage[:name]).to eq('about')
     end
 
-    it 'has a hash in index 0 which contains a list that specifies the correct number of visits to each page' do
+    it 'has a hash in index 1 which contains a list that has the correct second most viewed page, ordered by unique views' do
+        index1Hash = getOrderedLogs('test.log')[1]
+        secondMostViewedPage = index1Hash[:list][1]
+
+        expect(secondMostViewedPage[:name]).to eq('search')
+    end
+
+    it 'has a hash in index 1 which contains a list that has the correct third most viewed page, ordered by unique views' do
+        index1Hash = getOrderedLogs('test.log')[1]
+        thirdMostViewedPage = index1Hash[:list][2] 
+       
+        expect(thirdMostViewedPage[:name]).to eq('profile')
+    end
+
+    it 'has a hash in index 1 which contains a list that has the correct least viewed page, ordered by unique views' do
+        index1Hash = getOrderedLogs('test.log')[1]
+        leastViewedPage = index1Hash[:list][3]
+
+        expect(leastViewedPage[:name]).to eq('about')
+    end
+
+
+
+    it 'has a hash in index 0 which contains a list that specifies the correct number of visits to the most viewed page' do
         index0Hash = getOrderedLogs('test.log')[0]
         mostViewedPage = index0Hash[:list][0]
-        secondMostViewedPage = index0Hash[:list][1]
-        thirdMostViewedPage = index0Hash[:list][2] 
-        fourthMostViewedPage = index0Hash[:list][3]
 
         expect(mostViewedPage[:views]).to eq(5)
-        expect(secondMostViewedPage[:views]).to eq(4)
-        expect(thirdMostViewedPage[:views]).to eq(3)
-        expect(fourthMostViewedPage[:views]).to eq(1)
     end
 
-    it 'has a hash in index 1 which contains a list that specifies the correct number of unique visits to each page' do
+    it 'has a hash in index 0 which contains a list that specifies the correct number of visits to the second most viewed page' do
+        index0Hash = getOrderedLogs('test.log')[0]
+        secondMostViewedPage = index0Hash[:list][1]
+
+        expect(secondMostViewedPage[:views]).to eq(4)
+    end
+
+    it 'has a hash in index 0 which contains a list that specifies the correct number of visits to third most viewed page' do
+        index0Hash = getOrderedLogs('test.log')[0]
+        thirdMostViewedPage = index0Hash[:list][2] 
+ 
+        expect(thirdMostViewedPage[:views]).to eq(3)
+    end
+
+    it 'has a hash in index 0 which contains a list that specifies the correct number of visits to the least viewed page' do
+        index0Hash = getOrderedLogs('test.log')[0]
+        leastViewedPage = index0Hash[:list][3]
+
+        expect(leastViewedPage[:views]).to eq(1)
+    end
+
+    
+    it 'has a hash in index 1 which contains a list that specifies the correct number of unique visits to the most viewed page' do
         index1Hash = getOrderedLogs('test.log')[1]
         mostViewedPage = index1Hash[:list][0]
-        secondMostViewedPage = index1Hash[:list][1]
-        thirdMostViewedPage = index1Hash[:list][2] 
-        fourthMostViewedPage = index1Hash[:list][3]
 
         expect(mostViewedPage[:uniqueViews]).to eq(4)
+    end
+
+    it 'has a hash in index 1 which contains a list that specifies the correct number of unique visits to the second most viewed page' do
+        index1Hash = getOrderedLogs('test.log')[1]
+        secondMostViewedPage = index1Hash[:list][1]
+
         expect(secondMostViewedPage[:uniqueViews]).to eq(3)
+    end
+
+    it 'has a hash in index 1 which contains a list that specifies the correct number of unique visits to the third most viewed page' do
+        index1Hash = getOrderedLogs('test.log')[1]
+        thirdMostViewedPage = index1Hash[:list][2] 
+ 
         expect(thirdMostViewedPage[:uniqueViews]).to eq(2)
-        expect(fourthMostViewedPage[:uniqueViews]).to eq(1)
+    end
+
+    it 'has a hash in index 1 which contains a list that specifies the correct number of unique visits to the least viewed page' do
+        index1Hash = getOrderedLogs('test.log')[1] 
+        leastViewedPage = index1Hash[:list][3]
+
+        expect(leastViewedPage[:uniqueViews]).to eq(1)
     end
 
 end
